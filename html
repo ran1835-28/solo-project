@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelPal: Retro Pocket Pet</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="device-container">
+    <div class="screen-casing">
+      <div class="status-bar">
+        <span id="pet-name">Pixel</span>
+        <span id="pet-stage">Baby</span>
+        <span id="coin-count">🪙 50</span>
+      </div>
+
+      <div id="welcome-banner" class="welcome-banner hidden">
+        <p id="welcome-text"></p>
+        <button id="dismiss-banner-btn">Dismiss</button>
+      </div>
+
+      <div class="screen-display">
+        <div id="poop-container" class="poop-container"></div>
+        <div id="pet-avatar" class="pet-avatar">🐱</div>
+        <div id="thought-bubble" class="thought-bubble">I missed you!</div>
+      </div>
+
+      <div class="meters-panel">
+        <div class="meter-group">
+          <label>Hunger</label>
+          <div class="meter-bar"><div id="meter-hunger" class="meter-fill"></div></div>
+        </div>
+        <div class="meter-group">
+          <label>Energy</label>
+          <div class="meter-bar"><div id="meter-energy" class="meter-fill"></div></div>
+        </div>
+        <div class="meter-group">
+          <label>Happy</label>
+          <div class="meter-bar"><div id="meter-happy" class="meter-fill"></div></div>
+        </div>
+        <div class="meter-group">
+          <label>Hygiene</label>
+          <div class="meter-bar"><div id="meter-clean" class="meter-fill"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls-panel">
+      <button id="btn-feed" class="action-btn">🍕 Feed</button>
+      <button id="btn-play" class="action-btn">⚽ Play</button>
+      <button id="btn-sleep" class="action-btn">💤 Sleep</button>
+      <button id="btn-clean" class="action-btn">🧹 Clean</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
