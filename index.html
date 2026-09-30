@@ -1,57 +1,137 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PixelPal: Retro Pocket Pet</title>
+  <title>PixelPal: Interactive Care Pet</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="device-container">
-    <div class="screen-casing">
-      <div class="status-bar">
-        <span id="pet-name">Pixel</span>
-        <span id="pet-stage">Baby</span>
-        <span id="coin-count">🪙 50</span>
+    <div id="main-view" class="view-panel active">
+      <div class="screen-casing">
+        <div class="status-bar">
+          <span id="pet-name">Pixel</span>
+          <span id="pet-stage">Baby</span>
+          <span id="coin-count">🪙 50</span>
+        </div>
+
+        <div id="welcome-banner" class="welcome-banner hidden">
+          <p id="welcome-text"></p>
+          <button id="dismiss-banner-btn">Dismiss</button>
+        </div>
+
+        <div class="screen-display">
+          <div id="poop-container" class="poop-container"></div>
+          <div id="pet-avatar" class="pet-avatar">🐱</div>
+          <div id="thought-bubble" class="thought-bubble">I missed you!</div>
+          <div id="food-drop-target" class="food-drop-target hidden">Drop Food Here!</div>
+        </div>
+
+        <div class="meters-panel">
+          <div class="meter-group">
+            <label>Hunger</label>
+            <div class="meter-bar"><div id="meter-hunger" class="meter-fill"></div></div>
+          </div>
+          <div class="meter-group">
+            <label>Energy</label>
+            <div class="meter-bar"><div id="meter-energy" class="meter-fill"></div></div>
+          </div>
+          <div class="meter-group">
+            <label>Happy</label>
+            <div class="meter-bar"><div id="meter-happy" class="meter-fill"></div></div>
+          </div>
+          <div class="meter-group">
+            <label>Hygiene</label>
+            <div class="meter-bar"><div id="meter-clean" class="meter-fill"></div></div>
+          </div>
+        </div>
       </div>
 
-      <div id="welcome-banner" class="welcome-banner hidden">
-        <p id="welcome-text"></p>
-        <button id="dismiss-banner-btn">Dismiss</button>
-      </div>
-
-      <div class="screen-display">
-        <div id="poop-container" class="poop-container"></div>
-        <div id="pet-avatar" class="pet-avatar">🐱</div>
-        <div id="thought-bubble" class="thought-bubble">I missed you!</div>
-      </div>
-
-      <div class="meters-panel">
-        <div class="meter-group">
-          <label>Hunger</label>
-          <div class="meter-bar"><div id="meter-hunger" class="meter-fill"></div></div>
-        </div>
-        <div class="meter-group">
-          <label>Energy</label>
-          <div class="meter-bar"><div id="meter-energy" class="meter-fill"></div></div>
-        </div>
-        <div class="meter-group">
-          <label>Happy</label>
-          <div class="meter-bar"><div id="meter-happy" class="meter-fill"></div></div>
-        </div>
-        <div class="meter-group">
-          <label>Hygiene</label>
-          <div class="meter-bar"><div id="meter-clean" class="meter-fill"></div></div>
-        </div>
+      <div class="controls-panel">
+        <button id="btn-feed" class="action-btn">🍕 Kitchen</button>
+        <button id="btn-play" class="action-btn">⚽ Play Yard</button>
+        <button id="btn-sleep" class="action-btn">💤 Bedroom</button>
+        <button id="btn-clean" class="action-btn">🧹 Bathroom</button>
       </div>
     </div>
 
-    <div class="controls-panel">
-      <button id="btn-feed" class="action-btn">🍕 Feed</button>
-      <button id="btn-play" class="action-btn">⚽ Play</button>
-      <button id="btn-sleep" class="action-btn">💤 Sleep</button>
-      <button id="btn-clean" class="action-btn">🧹 Clean</button>
+    <!-- Kitchen Scene -->
+    <div id="kitchen-view" class="view-panel scene-kitchen">
+      <div class="scene-overlay">
+        <h3>🍳 Kitchen Prep</h3>
+        <p id="kitchen-step-text">Step 1: Open fridge to pick food</p>
+        
+        <div id="fridge-step" class="minigame-step">
+          <button id="btn-open-fridge" class="game-btn">🧊 Open Fridge</button>
+          <div id="food-options" class="item-grid hidden">
+            <button class="food-choice" data-food="🍕 Pizza">🍕 Pizza</button>
+            <button class="food-choice" data-food="🍔 Burger">🍔 Burger</button>
+            <button class="food-choice" data-food="🥗 Salad">🥗 Salad</button>
+          </div>
+        </div>
+
+        <div id="chop-step" class="minigame-step hidden">
+          <div id="chop-board" class="interact-area">🔪 Tap 5 times to chop!</div>
+          <div class="progress-bar"><div id="chop-progress" class="progress-fill"></div></div>
+        </div>
+
+        <div id="cook-step" class="minigame-step hidden">
+          <div id="stove-area" class="interact-area">🍳 Sizzling on stove...</div>
+          <button id="btn-finish-cook" class="game-btn">Serve Prepared Dish!</button>
+        </div>
+
+        <button class="back-btn" data-target="main-view">🔙 Back to Pet</button>
+      </div>
     </div>
+
+    <!-- Play Yard Scene -->
+    <div id="playyard-view" class="view-panel scene-playyard">
+      <div class="scene-overlay">
+        <h3>⚽ Play Yard Catch</h3>
+        <p id="play-step-text">Catch falling toys to earn happiness!</p>
+        <div id="catch-game-area" class="catch-area">
+          <div id="falling-toy" class="falling-toy">⚽</div>
+          <div id="player-basket" class="player-basket">🧺</div>
+        </div>
+        <div class="game-score">Score: <span id="game-score-num">0</span></div>
+        <button class="back-btn" data-target="main-view">🔙 Back to Pet</button>
+      </div>
+    </div>
+
+    <!-- Bedroom Scene -->
+    <div id="bedroom-view" class="view-panel scene-bedroom">
+      <div class="scene-overlay">
+        <h3>💤 Cozy Bedroom</h3>
+        <p id="bedroom-step-text">Turn off the light & tap bedtime stars!</p>
+        <div class="bedroom-controls">
+          <button id="btn-lamp-toggle" class="game-btn">💡 Toggle Lamp</button>
+        </div>
+        <div id="star-game-area" class="star-area">
+          <div class="star-target" data-id="1">⭐</div>
+          <div class="star-target" data-id="2">✨</div>
+          <div class="star-target" data-id="3">🌟</div>
+        </div>
+        <button class="back-btn" data-target="main-view">🔙 Back to Pet</button>
+      </div>
+    </div>
+
+    <!-- Bathroom Scene -->
+    <div id="bathroom-view" class="view-panel scene-bathroom">
+      <div class="scene-overlay">
+        <h3>🧹 Bathroom Cleanup</h3>
+        <p id="bathroom-step-text">Step 1: Sweep room, then scrub & rinse!</p>
+        <div class="bath-actions">
+          <button id="btn-bath-sweep" class="game-btn">🧹 Sweep Room</button>
+          <button id="btn-bath-scrub" class="game-btn" disabled>🧼 Lather Soap</button>
+          <button id="btn-bath-shower" class="game-btn" disabled>🚿 Spray Rinse</button>
+        </div>
+        <div id="bath-status-area" class="bath-status">Status: Needs Sweeping</div>
+        <button class="back-btn" data-target="main-view">🔙 Back to Pet</button>
+      </div>
+    </div>
+
   </div>
   <script src="script.js"></script>
 </body>
