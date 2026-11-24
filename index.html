@@ -4,25 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RIT Co-op Offer & Relocation True-Net Comparator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <div>
-      <h1>RIT Co-op Offer &amp; Relocation True-Net Comparator</h1>
-      <p class="subtitle">Compare up to 3 co-op offers after federal/state/FICA taxes, short-term housing, and transit costs.</p>
-    </div>
-    <div class="toolbar">
-      <button type="button" id="resetBtn">Reset Defaults</button>
-      <button type="button" class="primary" id="copyBtn">Copy Comparison Summary</button>
+    <div class="header-inner">
+      <div>
+        <div class="kicker">MGIS 130 &bull; RIT Co-op Decision Ledger</div>
+        <h1>RIT Co-op Offer &amp; Relocation True-Net Comparator</h1>
+        <p class="subtitle">Side-by-side take-home analysis accounting for progressive taxes, short-term rent, and transit.</p>
+      </div>
+      <div class="toolbar">
+        <button type="button" id="resetBtn">Reset Defaults</button>
+        <button type="button" class="primary" id="copyBtn">Copy Comparison Summary</button>
+      </div>
     </div>
   </header>
 
-  <div class="summary-banner" id="summaryBanner">
-    Loading comparison insights...
-  </div>
+  <div class="main-container">
+    <div class="summary-banner" id="summaryBanner">
+      Loading comparison insights...
+    </div>
 
-  <main class="offers-grid" id="offersGrid"></main>
+    <main class="offers-grid" id="offersGrid"></main>
+  </div>
 
   <footer>
     Built for MGIS 130 (RIT) &bull; Client-side estimation tool only (no personal data stored externally or transmitted).
