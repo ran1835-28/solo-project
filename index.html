@@ -3,134 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RIT Co-op Offer True-Net Comparator (v0.1)</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #f4f5f7;
-      color: #1f2937;
-      max-width: 720px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    header {
-      border-bottom: 3px solid #f76902; /* RIT Orange */
-      padding-bottom: 0.75rem;
-      margin-bottom: 1.5rem;
-    }
-    h1 { margin: 0; font-size: 1.5rem; }
-    .card {
-      background: #fff;
-      border-radius: 8px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-    label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-    input {
-      width: 100%;
-      padding: 0.5rem;
-      border: 1px solid #d1d5db;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    .results {
-      margin-top: 1.5rem;
-      padding-top: 1rem;
-      border-top: 1px solid #e5e7eb;
-    }
-    .row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-    }
-    .net-total {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #059669;
-      border-top: 2px solid #e5e7eb;
-      padding-top: 0.5rem;
-    }
-  </style>
+  <title>RIT Co-op Offer & Relocation True-Net Comparator</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <h1>RIT Co-op Offer True-Net Calculator (v0.1 Prototype)</h1>
-    <p>Core calculation engine testing progressive federal tax, FICA, state tax, and living costs.</p>
+    <div>
+      <h1>RIT Co-op Offer &amp; Relocation True-Net Comparator</h1>
+      <p class="subtitle">Compare up to 3 co-op offers after federal/state/FICA taxes, short-term housing, and transit costs.</p>
+    </div>
+    <div class="toolbar">
+      <button type="button" id="resetBtn">Reset Defaults</button>
+      <button type="button" class="primary" id="copyBtn">Copy Comparison Summary</button>
+    </div>
   </header>
 
-  <div class="card">
-    <div class="grid">
-      <div>
-        <label for="hourly">Hourly Rate ($/hr)</label>
-        <input type="number" id="hourly" value="28" min="0" step="0.5" />
-      </div>
-      <div>
-        <label for="hours">Hours / Week</label>
-        <input type="number" id="hours" value="40" min="1" max="80" />
-      </div>
-      <div>
-        <label for="weeks">Co-op Duration (Weeks)</label>
-        <input type="number" id="weeks" value="15" min="1" max="52" />
-      </div>
-      <div>
-        <label for="stipend">Relocation / Housing Stipend ($)</label>
-        <input type="number" id="stipend" value="1500" min="0" step="100" />
-      </div>
-      <div>
-        <label for="stateTax">Effective State + Local Tax (%)</label>
-        <input type="number" id="stateTax" value="5.5" min="0" max="15" step="0.1" />
-      </div>
-      <div>
-        <label for="rent">Monthly Rent + Utilities ($)</label>
-        <input type="number" id="rent" value="1100" min="0" step="50" />
-      </div>
-      <div>
-        <label for="commute">Monthly Commute / Transit ($)</label>
-        <input type="number" id="commute" value="120" min="0" step="10" />
-      </div>
-    </div>
-
-    <div class="results" id="results"></div>
+  <div class="summary-banner" id="summaryBanner">
+    Loading comparison insights...
   </div>
 
-  <script>
-    // Annualized progressive 2026 single-filer federal tax estimation (with standard deduction)
-    function estimateFederalTax(termGross, weeks) {
-      const annualized = (termGross / weeks) * 52;
-      const standardDeduction = 15000;
-      const taxable = Math.max(0, annualized - standardDeduction);
+  <main class="offers-grid" id="offersGrid"></main>
 
-      let annualTax = 0;
-      const brackets = [
-        { limit: 11925, rate: 0.10 },
-        { limit: 48475, rate: 0.12 },
-        { limit: 103350, rate: 0.22 },
-        { limit: Infinity, rate: 0.24 }
-      ];
+  <footer>
+    Built for MGIS 130 (RIT) &bull; Client-side estimation tool only (no personal data stored externally or transmitted).
+  </footer>
 
-      let prev = 0;
-      for (const b of brackets) {
-        if (taxable > prev) {
-          annualTax += (Math.min(taxable, b.limit) - prev) * b.rate;
-          prev = b.limit;
-        }
-      }
-      return (annualTax / 52) * weeks;
-    }
-
-    function calculate() {
-      const hourly = parseFloat(document.getElementById('hourly').value) || 0;
-      const hours = parseFloat(document.getElementById('hours').value) || 0;
-      const weeks = parseFloat(document.getElementById('weeks').value) || 1;
-      const stipend = parseFloat(document.getElementById('stipend').value) || 0;
-      const stateRate = (parseFloat(document.getElementById('stateTax').value) || 0) / 10
+  <script src="presets.js"></script>
+  <script src="calculator.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
