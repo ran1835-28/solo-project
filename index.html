@@ -1,138 +1,136 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PixelPal: Interactive Care Pet</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RIT Co-op Offer True-Net Comparator (v0.1)</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f5f7;
+      color: #1f2937;
+      max-width: 720px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    header {
+      border-bottom: 3px solid #f76902; /* RIT Orange */
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    h1 { margin: 0; font-size: 1.5rem; }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .results {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    .net-total {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #059669;
+      border-top: 2px solid #e5e7eb;
+      padding-top: 0.5rem;
+    }
+  </style>
 </head>
 <body>
-  <div class="device-container">
-    <div id="main-view" class="view-panel active">
-      <div class="screen-casing">
-        <div class="status-bar">
-          <span id="pet-name">Pixel</span>
-          <span id="pet-stage">Baby</span>
-          <span id="coin-count">🪙 50</span>
-        </div>
+  <header>
+    <h1>RIT Co-op Offer True-Net Calculator (v0.1 Prototype)</h1>
+    <p>Core calculation engine testing progressive federal tax, FICA, state tax, and living costs.</p>
+  </header>
 
-        <div id="welcome-banner" class="welcome-banner hidden">
-          <p id="welcome-text"></p>
-          <button id="dismiss-banner-btn">Dismiss</button>
-        </div>
-
-        <div class="screen-display">
-          <div id="poop-container" class="poop-container"></div>
-          <div id="pet-avatar" class="pet-avatar">🐱</div>
-          <div id="thought-bubble" class="thought-bubble">I missed you!</div>
-          <div id="food-drop-target" class="food-drop-target hidden">Drop Food Here!</div>
-        </div>
-
-        <div class="meters-panel">
-          <div class="meter-group">
-            <label>Hunger</label>
-            <div class="meter-bar"><div id="meter-hunger" class="meter-fill"></div></div>
-          </div>
-          <div class="meter-group">
-            <label>Energy</label>
-            <div class="meter-bar"><div id="meter-energy" class="meter-fill"></div></div>
-          </div>
-          <div class="meter-group">
-            <label>Happy</label>
-            <div class="meter-bar"><div id="meter-happy" class="meter-fill"></div></div>
-          </div>
-          <div class="meter-group">
-            <label>Hygiene</label>
-            <div class="meter-bar"><div id="meter-clean" class="meter-fill"></div></div>
-          </div>
-        </div>
+  <div class="card">
+    <div class="grid">
+      <div>
+        <label for="hourly">Hourly Rate ($/hr)</label>
+        <input type="number" id="hourly" value="28" min="0" step="0.5" />
       </div>
-
-      <div class="controls-panel">
-        <button id="btn-feed" class="action-btn">🍕 Kitchen</button>
-        <button id="btn-play" class="action-btn">⚽ Play Yard</button>
-        <button id="btn-sleep" class="action-btn">💤 Bedroom</button>
-        <button id="btn-clean" class="action-btn">🧹 Bathroom</button>
+      <div>
+        <label for="hours">Hours / Week</label>
+        <input type="number" id="hours" value="40" min="1" max="80" />
+      </div>
+      <div>
+        <label for="weeks">Co-op Duration (Weeks)</label>
+        <input type="number" id="weeks" value="15" min="1" max="52" />
+      </div>
+      <div>
+        <label for="stipend">Relocation / Housing Stipend ($)</label>
+        <input type="number" id="stipend" value="1500" min="0" step="100" />
+      </div>
+      <div>
+        <label for="stateTax">Effective State + Local Tax (%)</label>
+        <input type="number" id="stateTax" value="5.5" min="0" max="15" step="0.1" />
+      </div>
+      <div>
+        <label for="rent">Monthly Rent + Utilities ($)</label>
+        <input type="number" id="rent" value="1100" min="0" step="50" />
+      </div>
+      <div>
+        <label for="commute">Monthly Commute / Transit ($)</label>
+        <input type="number" id="commute" value="120" min="0" step="10" />
       </div>
     </div>
 
-    <!-- Kitchen Scene -->
-    <div id="kitchen-view" class="view-panel scene-kitchen">
-      <div class="scene-overlay">
-        <h3>🍳 Kitchen Prep</h3>
-        <p id="kitchen-step-text">Step 1: Open fridge to pick food</p>
-        
-        <div id="fridge-step" class="minigame-step">
-          <button id="btn-open-fridge" class="game-btn">🧊 Open Fridge</button>
-          <div id="food-options" class="item-grid hidden">
-            <button class="food-choice" data-food="🍕 Pizza">🍕 Pizza</button>
-            <button class="food-choice" data-food="🍔 Burger">🍔 Burger</button>
-            <button class="food-choice" data-food="🥗 Salad">🥗 Salad</button>
-          </div>
-        </div>
-
-        <div id="chop-step" class="minigame-step hidden">
-          <div id="chop-board" class="interact-area">🔪 Tap 5 times to chop!</div>
-          <div class="progress-bar"><div id="chop-progress" class="progress-fill"></div></div>
-        </div>
-
-        <div id="cook-step" class="minigame-step hidden">
-          <div id="stove-area" class="interact-area">🍳 Sizzling on stove...</div>
-          <button id="btn-finish-cook" class="game-btn">Serve Prepared Dish!</button>
-        </div>
-
-        <button class="back-btn" data-target="main-view">🔙 Back to Pet</button>
-      </div>
-    </div>
-
-    <!-- Play Yard Scene -->
-    <div id="playyard-view" class="view-panel scene-playyard">
-      <div class="scene-overlay">
-        <h3>⚽ Play Yard Catch</h3>
-        <p id="play-step-text">Catch falling toys to earn happiness!</p>
-        <div id="catch-game-area" class="catch-area">
-          <div id="falling-toy" class="falling-toy">⚽</div>
-          <div id="player-basket" class="player-basket">🧺</div>
-        </div>
-        <div class="game-score">Score: <span id="game-score-num">0</span></div>
-        <button class="back-btn" data-target="main-view">🔙 Back to Pet</button>
-      </div>
-    </div>
-
-    <!-- Bedroom Scene -->
-    <div id="bedroom-view" class="view-panel scene-bedroom">
-      <div class="scene-overlay">
-        <h3>💤 Cozy Bedroom</h3>
-        <p id="bedroom-step-text">Turn off the light & tap bedtime stars!</p>
-        <div class="bedroom-controls">
-          <button id="btn-lamp-toggle" class="game-btn">💡 Toggle Lamp</button>
-        </div>
-        <div id="star-game-area" class="star-area">
-          <div class="star-target" data-id="1">⭐</div>
-          <div class="star-target" data-id="2">✨</div>
-          <div class="star-target" data-id="3">🌟</div>
-        </div>
-        <button class="back-btn" data-target="main-view">🔙 Back to Pet</button>
-      </div>
-    </div>
-
-    <!-- Bathroom Scene -->
-    <div id="bathroom-view" class="view-panel scene-bathroom">
-      <div class="scene-overlay">
-        <h3>🧹 Bathroom Cleanup</h3>
-        <p id="bathroom-step-text">Step 1: Sweep room, then scrub & rinse!</p>
-        <div class="bath-actions">
-          <button id="btn-bath-sweep" class="game-btn">🧹 Sweep Room</button>
-          <button id="btn-bath-scrub" class="game-btn" disabled>🧼 Lather Soap</button>
-          <button id="btn-bath-shower" class="game-btn" disabled>🚿 Spray Rinse</button>
-        </div>
-        <div id="bath-status-area" class="bath-status">Status: Needs Sweeping</div>
-        <button class="back-btn" data-target="main-view">🔙 Back to Pet</button>
-      </div>
-    </div>
-
+    <div class="results" id="results"></div>
   </div>
-  <script src="script.js"></script>
-</body>
-</html>
+
+  <script>
+    // Annualized progressive 2026 single-filer federal tax estimation (with standard deduction)
+    function estimateFederalTax(termGross, weeks) {
+      const annualized = (termGross / weeks) * 52;
+      const standardDeduction = 15000;
+      const taxable = Math.max(0, annualized - standardDeduction);
+
+      let annualTax = 0;
+      const brackets = [
+        { limit: 11925, rate: 0.10 },
+        { limit: 48475, rate: 0.12 },
+        { limit: 103350, rate: 0.22 },
+        { limit: Infinity, rate: 0.24 }
+      ];
+
+      let prev = 0;
+      for (const b of brackets) {
+        if (taxable > prev) {
+          annualTax += (Math.min(taxable, b.limit) - prev) * b.rate;
+          prev = b.limit;
+        }
+      }
+      return (annualTax / 52) * weeks;
+    }
+
+    function calculate() {
+      const hourly = parseFloat(document.getElementById('hourly').value) || 0;
+      const hours = parseFloat(document.getElementById('hours').value) || 0;
+      const weeks = parseFloat(document.getElementById('weeks').value) || 1;
+      const stipend = parseFloat(document.getElementById('stipend').value) || 0;
+      const stateRate = (parseFloat(document.getElementById('stateTax').value) || 0) / 10
