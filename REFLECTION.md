@@ -1,5 +1,5 @@
 # Project Reflection & AI Critical Evaluation
-**Project:** RIT Co-op Offer & Relocation True-Net Comparator  
+**Project:** RIT Co-op Offer & Relocation True-Net Comparator
 **Course:** MGIS 130 – Information Systems & Technology  
 **Author:** Rowan Nichols  
 
