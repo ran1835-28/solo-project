@@ -2,7 +2,7 @@
 **Course:** MGIS 130 – Build Project (Web-App Track)  
 **Author:** Rowan Nichols  
 **Live App:** https://ran1835-28.github.io/solo-project/  
-**Repository:** 
+**Repository:** https://github.com/ran1835-28/solo-project
 ---
 
 ## 1. Problem Framing & Business Case
