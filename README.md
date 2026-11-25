@@ -1,7 +1,7 @@
 # RIT Co-op Offer & Relocation True-Net Comparator
 **Course:** MGIS 130 – Build Project (Web-App Track)  
 **Author:** Rowan Nichols  
-**Live App:**   
+**Live App:** https://ran1835-28.github.io/solo-project/  
 **Repository:** 
 ---
 
